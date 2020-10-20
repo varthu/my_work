@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <body>
+  	 <div id="hms">00:01:00</div>
+  </body>
+  <script type="text/javascript">
+     var timeoutHandle;
+    function count() {
+ 
+    var startTime = document.getElementById('hms').innerHTML;
+    var pieces = startTime.split(":");
+    var time = new Date();    
+    time.setHours(pieces[0]);
+    time.setMinutes(pieces[1]);
+    time.setSeconds(pieces[2]);
+    var timedif = new Date(time.valueOf() - 1000);
+    var newtime = timedif.toTimeString().split(" ")[0];
+    document.getElementById('hms').innerHTML=newtime;
+    timeoutHandle=setTimeout(count, 1000);
+    console.log(timedif,timedif.toTimeString())
+    if (newtime=="00:00:00"){
+    	alert("Time out!")
+
+    }
+}
+count();
+
+  </script>
+</head>
+</html>
+
+  
+  
+
+
+  

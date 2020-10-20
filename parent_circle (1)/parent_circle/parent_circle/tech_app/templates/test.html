@@ -1,0 +1,75 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.link{
+			cursor: pointer;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid grey;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="link" id="users-list-0">
+			jeyakannanrd@parentcircle.in
+		</div>
+		<div class="link" id="users-list-1">
+			jeyakannanrd@gmail.com
+		</div>
+		<div class="link" id="users-list-2">
+			rajesh@parentcircle.in		
+		</div>
+		<div class="link" id="users-list-3">
+			rrajesh@parentcircle.in
+		</div>
+		<div class="link" id="users-list-4">
+			 bharanidharanm@parentcircle.in		
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		$(".link").click(function(d){
+		$.ajax({
+			url: "https://stgsales-starr.parentcircle.com/api/sample-test/check-email/",
+			contentType:"application/json",
+			dataType:"json",
+			type:"GET",
+			headers:{"token" : "pc"},
+			cache:"true",
+			data:{
+				"email_id": $(this).text().trim(),
+				"format":"json",
+			},
+			success:function(data_)
+			{
+				console.log(data_)
+				$.ajax({
+					url:"/entry",
+					contentType:"application/json",
+					dataType:"json",
+					type:"GET",
+					cache:"true",
+					data: data_,	
+					success:function (data_s) {
+						alert(data_.return_msg)
+					}
+
+				});
+			}
+
+		});
+});		
+</script>
+</body>
+</html>
+

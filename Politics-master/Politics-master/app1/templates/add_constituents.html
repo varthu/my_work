@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+  .navbar {
+    background-color: #563d7c;
+    color: #f7f7f7;
+         }
+    .form-control {
+    border-radius: 1.5rem;
+       }
+       .btnSubmit {  
+          border-radius: 1.5rem;
+          padding: 1%;
+          width: 20%;
+          cursor: pointer;
+          background: #563d7c;
+          color: #fff;
+        }
+    .navbar-inverse .navbar-nav>li>a {
+        color: #fff;
+    }
+    .navbar-inverse .navbar-brand {
+        color: #FFEB3B;
+        font-weight: 700;
+        font-style: italic;
+    } 
+    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: #9e9e9ea3;
+    }     
+  	
+</style>
+<body>
+	<div class ="navbar navbar-inverse navbar-static-top ">
+      <div class = "container">
+        <a href="#" class="navbar-brand">Election - App</a>
+        <!-- <div class="collapse navbar-collapse navHeaderCollapse">
+          <nav> -->
+              <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/addMember">Add_member</a></li>
+                <li class="active"><a href="/addConstituents">Add_constituents</a></li>
+                <li ><a href="/addParty">Add_party</a></li>
+                <li><a href="/view_all">view</a></li>
+              </ul>
+          <!-- </nav> -->
+        </div>
+      </div>
+    </div>
+    <div class="container form">
+    <div class="form">
+      <form action="/addConstituents" method="POST">
+        {% csrf_token %}
+        <div class="form-content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <select name="district_dropdown" class="form-control">
+                  {% for i in districts_list %}
+                  <option value="{{i.district_id}}">{{i.district_name}}</option>
+                  {% endfor %}
+                </select>             
+              </div>
+              <div class="form-group">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" name="constituent_name" placeholder="constituent_name *" value="">
+              </div>
+              <div class="form-group">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btnSubmit">Submit</button>
+        </div>
+      </form>
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <form action="/addConstituents" method="POST">
+    {% csrf_token %}
+        <select name="district_dropdown">
+        	{% for i in districts_list %}
+        	<option value="{{i.district_id}}">{{i.district_name}}</option>
+        	{% endfor %}
+        </select>
+        
+
+        <input type="text" name="constituent_name" >
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+	

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    .navbar {
+    background-color: #563d7c;
+    color: #f7f7f7;
+         }
+    .form-control {
+    border-radius: 1.5rem;
+       }
+       .btnSubmit {  
+          border-radius: 1.5rem;
+          padding: 1%;
+          width: 20%;
+          cursor: pointer;
+          background: #563d7c;
+          color: #fff;
+        }
+    .navbar-inverse .navbar-nav>li>a {
+        color: #fff;
+    }
+    .navbar-inverse .navbar-brand {
+        color: #FFEB3B;
+        font-weight: 700;
+        font-style: italic;
+    } 
+    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: #9e9e9ea3;
+    } 
+.checkcontainer {
+    position: relative;
+    padding-left: 35px;
+    padding-right: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkcontainer input:checked ~ .radiobtn {
+    background-color: #2196F3;
+}
+.radiobtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.checkcontainer input:checked ~ .radiobtn:after {
+    display: block;
+}
+
+.checkcontainer .radiobtn:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.radiobtn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+  </style>
+</head>
+<body>
+  <div class ="navbar navbar-inverse navbar-static-top ">
+    <div class = "container">
+      <a href="#" class="navbar-brand">Election - App</a>
+      <div class="collapse navbar-collapse navHeaderCollapse">
+        <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li  ><a href="/addMember">Add_member</a></li>
+              <li><a href="/addConstituents">Add_constituents</a></li>
+              <li><a href="/addParty">Add_party</a></li>
+              <li><a href="/view_all">view</a></li>
+            </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+   <form action="/updateMember" method="POST">
+        {% csrf_token %}  
+    <div class="form">
+      <div class="form-content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" name="member_name" placeholder="Member_name *" value="{{member_name}}">
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" name="member_age" placeholder="Member_age *" value="{{member_age}}">
+            </div>
+            <div class="form-group" style=" padding-bottom: 2px; padding-top: 4px; ">
+              <label class="checkcontainer">MALE
+                <input type="radio" {% if gender == "M" %} checked="checked"  {% endif %} value="M" name="gender">
+                <span class="radiobtn"></span>
+              </label>
+              <label class="checkcontainer">FEMALE
+                <input type="radio"  {% if gender == "F" %} checked="checked"  {% endif %}  value="F" name="gender">
+                <span class="radiobtn"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="date" class="form-control" name="ruling_start_date" placeholder="ruling_start_date *" value="{{ruling_start_date}}" readonly>
+            </div>
+            <div class="form-group">
+              <select name="constituent_dropdown" class="form-control" placeholder="constituent_name " disabled="">
+                {% for i in data_constituents %}
+                <option value="{{i.constituent_id}}" 
+                {% if constituent_id == i.constituent_id %}
+                 selected="selected"  
+                 {% endif %}
+                  >{{i.constituent_name}}</option>
+                {% endfor %}
+              </select>
+              <input type="hidden" name="constituent_dropdown" value="{{constituent_id}}" />
+            </div>
+            <div class="form-group">
+              <select name="parties_dropdown" class="form-control" placeholder="party_name" disabled="">
+                    {% for i in parties %}
+                    <option value="{{i.0}}" {% if party_id == i.0 %} selected  {% endif %}>{{i.1}}</option>
+                    {% endfor %}
+              </select> 
+              <input type="hidden" name="parties_dropdown" value="{{party_id}}" />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btnSubmit">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+  <script type="text/javascript">
+    var d= {{constituent_id | safe}}
+    console.log(d)
+  </script>
+</body>
+</html>
+  

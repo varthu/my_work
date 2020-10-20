@@ -1,0 +1,133 @@
+<!-- #Districts.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table{
+	font-family: arial, sans-serif;
+    border-collapse: collapse;
+    text-align: center;
+    width: 50%;
+}
+ th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  background-color: skyblue;
+  padding: 8px;
+}
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+
+}
+</style>
+</head>
+<body>
+	<h2 >parties</h2>
+{% csrf_token %}
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  {% for i in data %}
+    <tr>
+      <td>{{i.0}}</td>
+      <td>{{i.1}}</td>
+      <td>{{i.2}}</td>
+    <tr>
+   {% endfor %}
+</table>
+<script type="text/javascript">
+  var data ={{ data | safe}}
+  console.log(data)
+</script>
+</body>
+</html>
+
+
+<!-- #add_constituents -->
+<form action="/addConstituents" method="POST">
+    {% csrf_token %}
+    <select name="district">
+      {% for i in districts %}
+        <option value="{{i.district_id}}">{{i.district_name}}</option>
+
+        {% endfor %}
+    </select>
+    <input type="text" name="cons_name" >
+    <input type="submit" name="submit" value="Submit">
+  </form>
+</body>
+</html>
+
+
+<!-- <div class="col-md-6">  
+              <div class="form-group">
+                <select name="parties_dropdown" class="form-control" placeholder="party_name">
+                  {% for i in parties %}
+                  <option value="{{i.0}}">{{i.1}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div> -->
+
+
+
+
+
+<div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Administration</td>
+                        <td>(171) 555-2222</td>
+                        <td>
+              <a class="add" title="" data-toggle="tooltip" data-original-title="Add"><i class="material-icons"></i></a>
+                            <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit"><i class="material-icons"></i></a>
+                            <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="material-icons"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Peter Parker</td>
+                        <td>Customer Service</td>
+                        <td>(313) 555-5735</td>
+                        <td>
+              <a class="add" title="" data-toggle="tooltip" data-original-title="Add"><i class="material-icons"></i></a>
+                            <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit"><i class="material-icons"></i></a>
+                            <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="material-icons"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fran Wilson</td>
+                        <td>Human Resources</td>
+                        <td>(503) 555-9931</td>
+                        <td>
+              <a class="add" title="" data-toggle="tooltip" data-original-title="Add"><i class="material-icons"></i></a>
+                            <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit"><i class="material-icons"></i></a>
+                            <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="material-icons"></i></a>
+                        </td>
+                    </tr>      
+                </tbody>
+            </table>
+        </div>

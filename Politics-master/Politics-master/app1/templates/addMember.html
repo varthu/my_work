@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://127.0.0.1:8000/addMember -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./addMember_files/bootstrap.min.css">
+  <script src="./addMember_files/jquery.min.js"></script>
+  <script src="./addMember_files/bootstrap.min.js"></script>
+  <style>
+    .navbar {
+    background-color: #563d7c;
+    color: #f7f7f7;
+         }
+    .form-control {
+    border-radius: 1.5rem;
+       }
+       .btnSubmit {  
+          border-radius: 1.5rem;
+          padding: 1%;
+          width: 20%;
+          cursor: pointer;
+          background: #563d7c;
+          color: #fff;
+        }
+    .navbar-inverse .navbar-nav>li>a {
+        color: #fff;
+    }
+    .navbar-inverse .navbar-brand {
+        color: #FFEB3B;
+        font-weight: 700;
+        font-style: italic;
+    } 
+    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: #9e9e9ea3;
+    } 
+.checkcontainer {
+    position: relative;
+    padding-left: 35px;
+    padding-right: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkcontainer input:checked ~ .radiobtn {
+    background-color: #2196F3;
+}
+.radiobtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.checkcontainer input:checked ~ .radiobtn:after {
+    display: block;
+}
+
+.checkcontainer .radiobtn:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.radiobtn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+  </style>
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-static-top ">
+    <div class="container">
+      <a href="http://127.0.0.1:8000/addMember#" class="navbar-brand">Election - App</a>
+      <div class="collapse navbar-collapse navHeaderCollapse">
+        <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="http://127.0.0.1:8000/addMember">Add_member</a></li>
+              <li><a href="http://127.0.0.1:8000/addConstituents">Add_constituents</a></li>
+              <li><a href="http://127.0.0.1:8000/addParty">Add_party</a></li>
+              <li><a href="http://127.0.0.1:8000/view_all">view</a></li>
+            </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="container form">
+    <form action="http://127.0.0.1:8000/addMember" method="POST">
+        <input type="hidden" name="csrfmiddlewaretoken" value="HiqheWJC9VVyAd2Rhg1R8eeV7xtHnUdtuAg3WIgPmDIOTtPELSJtFP4xKx80vcps">  
+    <div class="form">
+      <div class="form-content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-inline">
+              <input type="text" class="form-control" name="member_name" placeholder="Member_name *" value="">
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" name="member_age" placeholder="Member_age *" value="">
+            </div>
+            <div class="form-group" style=" padding-bottom: 2px; padding-top: 4px; ">
+              <label class="checkcontainer">MALE
+                <input type="radio" checked="checked" value="M" name="gender">
+                <span class="radiobtn"></span>
+              </label>
+              <label class="checkcontainer">FEMALE
+                <input type="radio" value="F" name="gender">
+                <span class="radiobtn"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="date" class="form-control" name="ruling_start_date" placeholder="ruling_start_date *" value="">
+            </div>
+            <div class="form-group">
+              <select name="constituent_dropdown" class="form-control" placeholder="constituent_name">
+                
+                <option value="17">bodinayakanur</option>
+                
+                <option value="28">dharmapuri(west)</option>
+                
+                <option value="19">kallakurinji</option>
+                
+                <option value="26">kanyakumari(east)</option>
+                
+                <option value="27">kanyakumari(west)</option>
+                
+                <option value="22">madurai(central)</option>
+                
+                <option value="20">madurai(north)</option>
+                
+                <option value="21">madurai(south)</option>
+                
+                <option value="23">madurai(west)</option>
+                
+                <option value="18">periyakulam</option>
+                
+                <option value="25">thiruchengodu</option>
+                
+                <option value="24">thirukoilur</option>
+                
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="parties_dropdown" class="form-control" placeholder="party_name">
+                    
+                    <option value="7">aiadmk</option>
+                    
+                    <option value="8">dmk</option>
+                    
+              </select> 
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btnSubmit">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+
+
+
+          
+
+              
+            
+     
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- #form > .row{
+      padding: 10px;
+      width :50; -->
+
+  <!-- <div class="container" id="form" style= "border: 1px solid black; padding:10px;">
+    <div class="row">    
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <label for="Member_name" class="col-md-4 col-form-label text-md-right">Member_name</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="Member_name" class="form-control" name="Member-name">
+        </div>
+      </div>   
+      <div class="col-md-6">
+      </div>   
+    </div>
+    <div class="row">    
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <label for="Age" class="col-md-4 col-form-label text-md-right">Age</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="Age" class="form-control" name="Age">
+        </div>
+      </div>   
+      <div class="col-md-6">
+      </div>   
+    </div>
+    <div class="row">    
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <label for="Date" class="col-md-4 col-form-label text-md-right">Date</label>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="Date" class="form-control" name="Date">
+        </div>
+      </div>   
+      <div class="col-md-6">
+      </div>   
+    </div>
+    <div class="row">    
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <label for="constituent_name" class="col-md-4 col-form-label text-md-right" >constituent_name</label>
+        </div>
+        <div class="col-md-6" >
+          <select name="constituent_dropdown" class="form-control">
+            
+            <option value="17">bodinayakanur</option>
+            
+            <option value="28">dharmapuri(west)</option>
+            
+            <option value="19">kallakurinji</option>
+            
+            <option value="26">kanyakumari(east)</option>
+            
+            <option value="27">kanyakumari(west)</option>
+            
+            <option value="22">madurai(central)</option>
+            
+            <option value="20">madurai(north)</option>
+            
+            <option value="21">madurai(south)</option>
+            
+            <option value="23">madurai(west)</option>
+            
+            <option value="18">periyakulam</option>
+            
+            <option value="25">thiruchengodu</option>
+            
+            <option value="24">thirukoilur</option>
+            
+          </select>
+        </div>    
+        </div>
+      </div>   
+      <div class="col-md-6">
+      </div>   
+    <div class="row">    
+      <div class="col-md-6">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>   
+      <div class="col-md-6">
+      </div>   
+    </div>
+  </div>
+</form>
+</body>
+</html>
+ -->
+ 
+
+
+<!-- <button type="text" id="submit" class="btn btn-outline-primary" name="submit">
+ -->
+</body></html>

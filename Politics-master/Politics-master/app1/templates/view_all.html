@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+  <title>parties</title>
+  <style>
+    .navbar {
+    background-color: #563d7c;
+    color: #f7f7f7;
+         }
+    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: #9e9e9ea3;
+    }  
+    a{ 
+        color: #673ab7d9;
+      }
+    .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+      color:#fff;
+      background-color: #3f51b5a6;;
+     }
+     p{
+      color: #673ab7d9;
+      font-style: italic;
+     }
+    
+  </style>
+</head>
+<body>
+  <div class ="navbar navbar-inverse navbar-static-top ">
+    <div class = "container">
+      <a href="#" class="navbar-brand">Election - App</a>
+      <div class="collapse navbar-collapse navHeaderCollapse">
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="/addMember">Add_member</a></li><!-- href->redirecting -->
+            <li ><a href="/addConstituents">Add_constituents</a></li>
+            <li ><a href="/addParty">Add_party</a></li>
+            <li class = "active"><a href="/view_all">view</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+    <div class = "container">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Add_member">MEMBER</a></li>
+        <li><a data-toggle="tab" href="#Add_constituents">CONSTITUENTS</a></li>
+        <li><a data-toggle="tab" href="#Add_party">PARTIES</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="Add_member" class="tab-pane fade in active">
+          <h3></h3>
+          <p>View member</p>
+          <div class="container">
+            <table id="view_member" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>district_name</th>
+                  <th>constituent_name</th>
+                  <th>member_name</th>
+                  <th>party_name</th>
+                  <th>current_leader</th>
+                  <th>party_symbol</th>
+                  <th>gender</th>
+                  <th>action</th>
+                  
+                </tr>
+              </thead>
+              <tbody><!-- #--><!-- scriptlets --> 
+                {% for i in data %} 
+                <tr>
+                  <td>{{i.0}}</td>
+                  <td>{{i.1}} </td>
+                  <td>{{i.2}}</td>
+                  <td>{{i.3}}</td>
+                  <td>{{i.4}}</td>
+                  <td>{{i.5}}</td>
+                  <td>{{i.6}}</td>
+                  <td>
+                    <form action="/editMember" method="POST"><!-- httprequest -->
+                      {% csrf_token %}
+                      <button type="submit" name="edit" class="edit" value="{{i.7}}"  title="EDIT"><i class="material-icons"></i></button>  
+                      <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="material-icons"></i></a>
+                  </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="Add_constituents" class="tab-pane fade">
+          <h3></h3>
+          <p>View constituents</p>
+           <div class="container">
+            <table id="view_constituents"class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>constituent_id</th>
+                  <th>constituent_name</th>
+                  <th>district_id</th>
+                </tr>
+              </thead>
+              <tbody><!-- #--><!-- scriptlets --> 
+                {% for i in data1 %} 
+                <tr>
+                  <td>{{i.constituent_id}}</td>
+                  <td>{{i.constituent_name}} </td>
+                  <td>{{i.district_id}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>  
+        <div id="Add_party" class="tab-pane fade">
+          <h3></h3>
+          <p>View parties</p>
+          <div class="container">
+            <table  id="view_parties" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>party_id</th>
+                  <th>party_symbol</th>
+                  <th>party_started</th>
+                  <th>started_leader</th>
+                  <th>current_leader</th>
+                  <th>party_name</th>
+                </tr>
+              </thead>
+              <tbody><!-- #--><!-- scriptlets --> 
+                {% for i in data2 %} 
+                <tr>
+                  <td>{{i.party_id}}</td>
+                  <td>{{i.party_symbol}} </td>
+                  <td>{{i.party_started}}</td>
+                  <td>{{i.started_leader}}</td>
+                  <td>{{i.current_leader}}</td>
+                  <td>{{i.party_name}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready( function () {
+          $('#view_member').DataTable();
+        } );
+         $(document).ready( function () {
+          $('#view_constituents').DataTable();
+        } );
+          $(document).ready( function () {
+          $('#view_parties').DataTable();
+        } );
+    </script>
+</body>
+</html>
+        
+
+  

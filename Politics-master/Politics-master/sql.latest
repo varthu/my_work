@@ -1,0 +1,63 @@
+CREATE TABLE example ( id smallint unsigned not null auto_increment, name varchar(20) not null, constraint pk_example primary key (id) );
+
+create table parties (party_id int not null auto_increment,party_symbol varchar(23) not null,party_started date not null,started_leader varchar(34) not null,current_leader varchar(23) not null,party_name varchar(29), constraint pk_parties primary key (party_id) );
+
+
+
+create table constituents ( place_name varchar(32), district_id int,CONSTRAINT FK_districtid FOREIGN KEY (district_id) REFERENCES districts(district_id));
+create table districts (district_id int not null primary key, district_name varchar(24));
+
+LOAD DATA INFILE '/var/lib/mysql-files/districts.csv' 
+INTO TABLE districts 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+ALTER TABLE constituents
+ADD COLUMN constituent_id INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (constituent_id);
+ALTER TABLE constituents 
+MODIFY constituent_id int NOT NULL;
+ALTER TABLE party_member
+ADD COLUMN gender CHAR(1) NOT NULL;
+INSERT INTO party_member (gender) VALUES WHERE (member_name LIKE "P*" OR Name LIKE "*i") as ('F')and gender<> "M"        
+        ('F'), ('M')  ;
+SELECT pet_id, Name, Type, Breed, Gender
+FROM pet
+WHERE (Name LIKE "s*" OR Name LIKE "*s")
+and gender <> "M"  
+INSERT INTO party_member (gender)VALUES ('F'), ('M')  ;      
+
+ALTER TABLE constituents ADD CONSTRAINT unique_const_district UNIQUE (place_name ,district_id);
+ALTER TABLE party_members ADD CONSTRAINT Unique_const_date UNIQUE (constituent_id,ruling_start_date); 
+select * , (select district_name from districts where district_id=t.district_id)as district from constituents t;
+
+
+Member name ,
+Member age,
+Constituent_id
+Party_id
+Ruling_inbtw Date
+
+
+create table party_member(member_name varchar(34) not null,member_age int , constituent_id int,CONSTRAINT FK_constituent_id FOREIGN KEY (constituent_id) REFERENCES constituents(constituent_id), party_id int ,
+CONSTRAINT FK_party_id FOREIGN KEY (party_id) REFERENCES parties(party_id));
+
+alter table party_member add column ruling_inbetween_date date ;
+
+ALTER TABLE party_member change  ruling_inbetween_date  ruling_start_date date();
+ALTER TABLE constituents change  place_name  constituent_name varchar(60);
+
+delete all records-->delete from tablename;
+
+select districts.district_name,constituents.constituent_name,party_member.member_name,parties.party_name,parties.current_leader,parties.party_symbol,party_member.gender,CONCAT(party_member.constituent_id, '_', party_member.ruling_start_date) AS date_id from party_member 
+inner join constituents on party_member.constituent_id=constituents.constituent_id 
+inner join districts on constituents.district_id= districts.district_id 
+inner join parties on parties.party_id=party_member.party_id;
+
+
+UPDATE  party_member SET     gender = IF(member_name = 'Pon. Saraswathi', 'F', 'M');
+    
+
+    
